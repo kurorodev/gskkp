@@ -5,7 +5,7 @@ class Toolbar:
         self.x = x
         self.y = y
         self.tools = tools
-        self.button_size = 80
+        self.button_size = 50
         self.height = len(tools) * (self.button_size + 5) + 10
         self.rect = pygame.Rect(x, y, 100, self.height)
         

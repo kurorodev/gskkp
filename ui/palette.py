@@ -5,7 +5,7 @@ class ColorPalette:
         self.x = x
         self.y = y
         self.colors = colors
-        self.size = 30
+        self.size = 20
         self.rect = pygame.Rect(x, y, len(colors) * (self.size + 5) + 5, self.size + 10)
         
     def handle_event(self, event):
