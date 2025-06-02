@@ -37,6 +37,16 @@ class RightTriangle:
         
         return abs(area - (area1 + area2 + area3)) < 0.1
     
+    def intersects(self, other):
+        """Проверка пересечения с другим полигоном или треугольником"""
+        from operations.tmo import TMOperations  # Локальный импорт
+        for i in range(len(self.points)):
+            for j in range(len(other.points)):
+                if TMOperations.lines_intersect(self.points[i], self.points[(i + 1) % len(self.points)],
+                                                  other.points[j], other.points[(j + 1) % len(other.points)]):
+                    return True
+        return False
+    
     def move(self, offset):
         dx = offset[0] - self.position[0]
         dy = offset[1] - self.position[1]

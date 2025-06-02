@@ -1,6 +1,7 @@
 import pygame
 from operations.transformations import Transformation
 
+
 class Polygon:
     def __init__(self, points, color):
         self.points = points
@@ -30,6 +31,16 @@ class Polygon:
                             inside = not inside
             p1x, p1y = p2x, p2y
         return inside
+    
+    def intersects(self, other):
+        from operations.tmo import TMOperations
+        """Проверка пересечения с другим полигоном"""
+        for i in range(len(self.points)):
+            for j in range(len(other.points)):
+                if TMOperations.lines_intersect(self.points[i], self.points[(i + 1) % len(self.points)],
+                                                  other.points[j], other.points[(j + 1) % len(other.points)]):
+                    return True
+        return False
     
     def move(self, offset):
         dx = offset[0] - self.position[0]

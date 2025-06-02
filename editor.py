@@ -32,7 +32,8 @@ class GraphicsEditor:
             ("rotate", "Поворот (Rc)"),
             ("scale_x", "Масшт.X (Sxc)"),
             ("scale_xy", "Масшт.XY (Sxyf)"),
-            ("move", "Перемещение")
+            ("move", "Перемещение"),
+            ("clear", "Очистить экран")  # Добавляем кнопку очистки
         ])
 
         self.palette = ColorPalette(self.width - 200, 10, [
@@ -42,6 +43,12 @@ class GraphicsEditor:
 
         self.font = pygame.font.SysFont(None, 24)
         self.status = "Готов"
+
+    def clear_screen(self):
+        """Удаляет все объекты с холста и сбрасывает выделение."""
+        self.objects.clear()
+        self.selected_objects.clear()
+        self.status = "Экран очищен"
 
     def handle_events(self):
         for event in pygame.event.get():
@@ -53,6 +60,10 @@ class GraphicsEditor:
                 self.current_tool = tool
                 self.temp_points = []
                 self.status = f"Выбран инструмент: {tool}"
+
+                # Обработка нажатия кнопки очистки
+                if tool == "clear":
+                    self.clear_screen()
 
             color = self.palette.handle_event(event)
             if color:
@@ -214,7 +225,6 @@ class GraphicsEditor:
         else:
             self.status = "Выделите ровно 2 объекта для TMO"
             print("Необходимо выделить ровно 2 объекта")  # Отладочное сообщение
-
 
     def run(self):
         clock = pygame.time.Clock()
