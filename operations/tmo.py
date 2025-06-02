@@ -5,16 +5,17 @@ from primitives.polygon import Polygon
 class TMOperations:
     @staticmethod
     def union(poly1, poly2):
-        # Упрощенная реализация объединения
+        """Упрощенная реализация объединения"""
         all_points = poly1.points + poly2.points
         hull = TMOperations.convex_hull(all_points)
         if hull:
-            return Polygon(hull, poly1.color)
+            # Создаем новый полигон с объединенными точками
+            return Polygon(hull, poly1.color)  # Можно использовать цвет одного из полигонов
         return None
 
     @staticmethod
     def symmetric_difference(poly1, poly2):
-        # Упрощенная реализация симметрической разности
+        """Упрощенная реализация симметрической разности"""
         points = []
         for p in poly1.points:
             if not poly2.contains_point(p):
@@ -27,7 +28,7 @@ class TMOperations:
         if len(points) >= 3:
             hull = TMOperations.convex_hull(points)
             if hull:
-                return Polygon(hull, poly1.color)
+                return Polygon(hull, poly1.color)  # Можно использовать цвет одного из полигонов
         return None
 
     @staticmethod
