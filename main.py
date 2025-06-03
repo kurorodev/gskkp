@@ -3,7 +3,7 @@ from editor import GraphicsEditor
 
 def main():
     pygame.init()
-    editor = GraphicsEditor(1600, 900)
+    editor = GraphicsEditor(1348, 640)
     editor.run()
 
 if __name__ == "__main__":
